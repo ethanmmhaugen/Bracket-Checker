@@ -25,19 +25,48 @@ private:
     {
         Object data;
         Node *next;
+        Node *prev;
 
-        Node(const Object &d = Object{}, Node *n = nullptr)
-            : data{d}, next{n} {};
+        Node(const Object &d = Object{}, Node *n = nullptr, Node *p = nullptr)
+            : data{d}, next{n}, prev {p};
     };
     
     Node *head;
+    Node *tail;
+    int size = 0;
 
 public:
 
 // You need to implement
 // Default construction
+DSList(){
+    head = nullptr;
+    tail = nullptr;
+}
 // Copy constructor
+DSList(const DSList& list){
+    head = new Node(list.head->data);
+    size++;
+    Node *curr = head;
+    while(list.head->next != nullptr){
+        list.head = list.head->next;
+        curr->next = new Node(list.head->data, nullptr, curr);
+        size++;
+        curr = curr->next;
+    }
+    tail = curr;
+}
 // Destructor
+~DSList() {
+    Node* curr= head->next;
+    while(curr != nullptr){
+        head = curr.next;
+        delete curr;
+        curr = head;
+        
+
+    }
+}
 // size
 // empty?
 // clear
