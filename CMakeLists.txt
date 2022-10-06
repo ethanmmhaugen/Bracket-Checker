@@ -15,6 +15,6 @@ add_executable(check_brackets main.cpp)
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 
 # testing with the single_include versions of Catch2 V2 (in directory catch2)
-include(CTest)
+#include(CTest)
 add_executable(tests test.cpp)
 add_test(NAME SimpleTest COMMAND tests)

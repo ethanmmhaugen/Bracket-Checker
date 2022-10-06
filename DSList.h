@@ -28,12 +28,12 @@ private:
         Node *prev;
 
         Node(const Object &d = Object{}, Node *n = nullptr, Node *p = nullptr)
-            : data{d}, next{n}, prev {p};
+            : data{d}, next{n}, prev {p} {};
     };
     
     Node *head;
     Node *tail;
-    int size = 0;
+    int size;
 
 public:
 
@@ -42,11 +42,12 @@ public:
 DSList(){
     head = nullptr;
     tail = nullptr;
+    size = 0;
 }
 // Copy constructor
 DSList(const DSList& list){
     head = new Node(list.head->data);
-    size++;
+    size = 1;
     Node *curr = head;
     while(list.head->next != nullptr){
         list.head = list.head->next;
@@ -60,18 +61,23 @@ DSList(const DSList& list){
 ~DSList() {
     Node* curr= head->next;
     while(curr != nullptr){
-        head = curr.next;
+        head = curr->next;
         delete curr;
         curr = head;
-        
-
     }
 }
 // size
+int getSize(){
+    return size;
+}
 // empty?
+bool isEmpty(){
+    return(size == 0);
+}
 // clear
 // find an element with a specific value (and return the position. First element in list is pos 0).
 // insert in front (push_front).
+
 // insert at a specified position.
 // remove the element in front (pop_front)
 // remove using position.

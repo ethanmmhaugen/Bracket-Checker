@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/check_brackets.dir/main.cpp.o  -o check_brackets 

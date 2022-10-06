@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/ethan/OneDrive/Documents/GitHub/assignment-3-do-my-brackets-match-ethanmmhaugen/DSList.h
+
+/mnt/c/Users/ethan/OneDrive/Documents/GitHub/assignment-3-do-my-brackets-match-ethanmmhaugen/DSStack.h
+
+/mnt/c/Users/ethan/OneDrive/Documents/GitHub/assignment-3-do-my-brackets-match-ethanmmhaugen/main.cpp
+iostream
+-
+algorithm
+-
+DSList.h
+/mnt/c/Users/ethan/OneDrive/Documents/GitHub/assignment-3-do-my-brackets-match-ethanmmhaugen/DSList.h
+DSStack.h
+/mnt/c/Users/ethan/OneDrive/Documents/GitHub/assignment-3-do-my-brackets-match-ethanmmhaugen/DSStack.h
+

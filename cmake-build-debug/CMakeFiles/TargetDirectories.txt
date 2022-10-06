@@ -1,0 +1,4 @@
+/mnt/c/Users/ethan/OneDrive/Documents/GitHub/assignment-3-do-my-brackets-match-ethanmmhaugen/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/ethan/OneDrive/Documents/GitHub/assignment-3-do-my-brackets-match-ethanmmhaugen/cmake-build-debug/CMakeFiles/edit_cache.dir
+/mnt/c/Users/ethan/OneDrive/Documents/GitHub/assignment-3-do-my-brackets-match-ethanmmhaugen/cmake-build-debug/CMakeFiles/tests.dir
+/mnt/c/Users/ethan/OneDrive/Documents/GitHub/assignment-3-do-my-brackets-match-ethanmmhaugen/cmake-build-debug/CMakeFiles/check_brackets.dir
