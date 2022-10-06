@@ -8,7 +8,7 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-
+    DSList* l = new DSList();
     cout << "Checker not implemented!" << endl;
 
     for (int i = 1; i < argc; ++i)
