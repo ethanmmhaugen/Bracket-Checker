@@ -38,6 +38,9 @@ TEST_CASE("Check that DSList works", "[DSList]")
 
         CHECK(l2->pop_front() == 2);
         CHECK(l2->getSize() == 2);
+        l2->pop_val(0);
+        CHECK(l2->getSize() == 1);
+        CHECK(l2->pop_index(0) == 1);
         l2->~DSList();
     }
 

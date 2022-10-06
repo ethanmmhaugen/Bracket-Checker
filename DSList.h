@@ -149,14 +149,18 @@ Object pop_front(){
     return stuff;
 }
 // remove using position.
-void pop_index(int index){
+Object pop_index(int index){
         Node* curr = head;
         for (int i = 0; i< index; i++){
             curr = curr->next;
         }
-        curr->next->prev = curr->prev;
-        curr->prev->next = curr->next;
+        Object stuff = curr->data;
+        Node* behind = curr->next;
+        Node* front = curr->prev;
+        behind->prev = front;
+        front->next = behind;
         delete curr;
+        return stuff;
 }
 // remove an element with a specific value (find and remove)
 void pop_val(Object val){
@@ -169,6 +173,7 @@ void pop_val(Object val){
         curr->prev->next = curr->next;
         delete curr;
     }
+    size--;
 }
 Node* getHead(){
     return head;
