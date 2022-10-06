@@ -59,12 +59,13 @@ DSList(const DSList& list){
 }
 // Destructor
 ~DSList() {
-    Node* curr= head->next;
+    Node* curr= head;
     while(curr != nullptr){
         head = curr->next;
         delete curr;
         curr = head;
     }
+
 }
 // size
 int getSize(){
@@ -78,9 +79,9 @@ bool isEmpty(){
 
 // find an element with a specific value (and return the position. First element in list is pos 0).
 int findNum(int num){
-    Node* tmp = head->next;
+    Node* tmp = head;
     int count = 0;
-    while(tmp->next !=nullptr){
+    while(tmp !=nullptr){
         if(tmp->data == num){
             return count;
         }
@@ -99,12 +100,18 @@ void push_front(Node x){
 }
 
 //insert in front using value only
-void push_front(int value){
+void push_front(Object value){
     Node* curr = head;
-    curr = curr-> next;
-    Node* insert = new Node(value, curr, nullptr);
+    Node* insert = new Node(value, nullptr, nullptr);
+    size++;
+    if(curr!= nullptr){
+        insert->next = curr;
+        curr->prev = insert;
+    }
+    else{
+        tail = insert;
+    }
     head = insert;
-    curr->prev = insert;
 }
 
 // insert at a specified position.
@@ -121,7 +128,7 @@ void push_index(Node x, int index){
 }
 
 //insert at a specified position using value only
-void push_index(int index, int value){
+void push_index(int index, Object value){
     Node* curr = head;
     for (int i = 0; i< index; i++){
         curr = curr->next;
@@ -132,11 +139,14 @@ void push_index(int index, int value){
     curr->prev = insert;
 }
 // remove the element in front (pop_front)
-void pop_front(){
+Object pop_front(){
     Node* curr = head->next;
     curr->prev = nullptr;
+    Object stuff = head->data;
     delete head;
     head = curr;
+    size--;
+    return stuff;
 }
 // remove using position.
 void pop_index(int index){
@@ -149,7 +159,7 @@ void pop_index(int index){
         delete curr;
 }
 // remove an element with a specific value (find and remove)
-void pop_val(int val){
+void pop_val(Object val){
     Node* curr = head;
     while(curr->data != val && curr->next != nullptr){
         curr = curr->next;
@@ -159,6 +169,12 @@ void pop_val(int val){
         curr->prev->next = curr->next;
         delete curr;
     }
+}
+Node* getHead(){
+    return head;
+}
+Node* getTail(){
+    return tail;
 }
 
 };
