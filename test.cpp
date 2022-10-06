@@ -9,7 +9,8 @@ TEST_CASE("Check that DSList works", "[DSList]")
 {
     // add test cases (create lists and specify what the expected output is)
     DSList l = new DSList();
-    CHECK(0 + 1 == 1);
+    CHECK(l.head == nullptr);
+    CHECK(l.tail == nullptr);
     // This creates an error
     CHECK(0 == 1);
 }

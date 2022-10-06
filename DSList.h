@@ -75,13 +75,91 @@ bool isEmpty(){
     return(size == 0);
 }
 // clear
+
 // find an element with a specific value (and return the position. First element in list is pos 0).
+int findNum(int num){
+    Node* tmp = head->next;
+    int count = 0;
+    while(tmp->next !=nullptr){
+        if(tmp->data == num){
+            return count;
+        }
+        tmp = tmp->next;
+        count++;
+    }
+    return -1;
+}
 // insert in front (push_front).
+void push_front(Node x){
+    Node* curr = head;
+    curr->prev = x;
+    x->next = curr;
+    head = x;
+
+}
+
+//insert in front using value only
+void push_front(int value){
+    Node* curr = head;
+    curr = curr-> next;
+    Node* insert = new Node(value, curr, nullptr);
+    head = insert;
+    curr->prev = insert;
+}
 
 // insert at a specified position.
+void push_index(Node x, int index){
+    Node* curr = head;
+    for (int i = 0; i< index; i++){
+        curr = curr->next;
+    }
+    Node* pre = curr->prev;
+    curr->prev = x;
+    x->next = curr;
+    pre->next = x;
+    x->prev = pre;
+}
+
+//insert at a specified position using value only
+void push_index(int index, int value){
+    Node* curr = head;
+    for (int i = 0; i< index; i++){
+        curr = curr->next;
+    }
+    Node* pre = curr->prev;
+    Node* insert = new Node(value, curr, pre);
+    pre->next = insert;
+    curr->prev = insert;
+}
 // remove the element in front (pop_front)
+void pop_front(){
+    Node* curr = head->next;
+    curr->prev = nullptr;
+    delete head;
+    head = curr;
+}
 // remove using position.
+void pop_index(int index){
+        Node* curr = head;
+        for (int i = 0; i< index; i++){
+            curr = curr->next;
+        }
+        curr->next->prev = curr->prev;
+        curr->prev->next = curr->next;
+        delete curr;
+}
 // remove an element with a specific value (find and remove)
+void pop_val(int val){
+    Node* curr = head;
+    while(curr->data != val && curr->next != nullptr){
+        curr = curr->next;
+    }
+    if(curr->next != nullptr) {
+        curr->next->prev = curr->prev;
+        curr->prev->next = curr->next;
+        delete curr;
+    }
+}
 
 };
 

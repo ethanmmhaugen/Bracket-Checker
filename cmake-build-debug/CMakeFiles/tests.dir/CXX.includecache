@@ -6,6 +6,8 @@
 
 #IncludeRegexTransform: 
 
+/mnt/c/Users/ethan/OneDrive/Documents/GitHub/assignment-3-do-my-brackets-match-ethanmmhaugen/DSList.h
+
 /mnt/c/Users/ethan/OneDrive/Documents/GitHub/assignment-3-do-my-brackets-match-ethanmmhaugen/catch2/catch.hpp
 TargetConditionals.h
 -
@@ -603,4 +605,6 @@ cassert
 /mnt/c/Users/ethan/OneDrive/Documents/GitHub/assignment-3-do-my-brackets-match-ethanmmhaugen/test.cpp
 catch2/catch.hpp
 /mnt/c/Users/ethan/OneDrive/Documents/GitHub/assignment-3-do-my-brackets-match-ethanmmhaugen/catch2/catch.hpp
+DSList.h
+/mnt/c/Users/ethan/OneDrive/Documents/GitHub/assignment-3-do-my-brackets-match-ethanmmhaugen/DSList.h
 
