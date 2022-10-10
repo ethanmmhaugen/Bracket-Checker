@@ -1,6 +1,6 @@
 #ifndef DSList_H
 #define DSList_H
-
+using namespace std;
 /**
  * @brief Singly-linked list that uses position
  *
@@ -65,6 +65,8 @@ DSList(const DSList& list){
         delete curr;
         curr = head;
     }
+    head = nullptr;
+    tail = nullptr;
 
 }
 // size
@@ -140,8 +142,17 @@ void push_index(int index, Object value){
 }
 // remove the element in front (pop_front)
 Object pop_front(){
+    /*if(head == nullptr){
+        return;
+    }
+     */
     Node* curr = head->next;
-    curr->prev = nullptr;
+    if(curr != nullptr){
+        curr->prev = nullptr;
+    }
+    else{
+        tail = nullptr;
+    }
     Object stuff = head->data;
     delete head;
     head = curr;
@@ -157,13 +168,46 @@ Object pop_index(int index){
         Object stuff = curr->data;
         Node* behind = curr->next;
         Node* front = curr->prev;
-        behind->prev = front;
-        front->next = behind;
+        if(behind != nullptr) {
+            behind->prev = front;
+        }
+        else{
+            tail = front;
+        }
+        if(front != nullptr) {
+            front->next = behind;
+        }
+        else{
+            head = behind;
+        }
         delete curr;
+        size--;
         return stuff;
 }
 // remove an element with a specific value (find and remove)
 void pop_val(Object val){
+    Node* curr = head;
+    while(curr->data != val && curr->next != nullptr){
+        curr = curr->next;
+    }
+    if(curr->data == val) {
+        if (curr->next != nullptr && curr->prev != nullptr) {
+            curr->next->prev = curr->prev;
+            curr->prev->next = curr->next;
+
+        } else if (curr->next == nullptr) {
+            tail = curr->prev;
+            curr->prev->next = nullptr;
+        } else {
+            head = curr->next;
+            curr->next->prev = nullptr;
+        }
+        delete curr;
+        size--;
+    }
+}
+//remove all objects with a specific value
+void pop_all_val(Object val){
     Node* curr = head;
     while(curr->data != val && curr->next != nullptr){
         curr = curr->next;
@@ -175,12 +219,31 @@ void pop_val(Object val){
     }
     size--;
 }
+
 Node* getHead(){
     return head;
 }
 Node* getTail(){
     return tail;
 }
+
+void print() {
+    if(head == NULL) {
+        cout << "empty list";
+    } else {
+        Node* current = head;
+        while(current != NULL) {
+            if(current->next != NULL) {
+                cout << current->data << " <=> ";
+            } else {
+                cout << current->data << endl;
+            }
+            current = current->next;
+        }
+    }
+}
+
+
 
 };
 

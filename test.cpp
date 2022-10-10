@@ -7,6 +7,8 @@ using namespace std;
 
 
 TEST_CASE("Check that DSList works", "[DSList]")
+
+
 {
     // add test cases (create lists and specify what the expected output is)
     SECTION("Constructor") {
@@ -31,6 +33,7 @@ TEST_CASE("Check that DSList works", "[DSList]")
         for (int i = 0; i < 3; i++) {
             l2->push_front(i);
         }
+        l2->print();
         CHECK(l2->getSize() == 3);
         CHECK(l2->findNum(3) == -1);
         CHECK(l2->findNum(2) == 0);
@@ -41,11 +44,14 @@ TEST_CASE("Check that DSList works", "[DSList]")
         l2->pop_val(0);
         CHECK(l2->getSize() == 1);
         CHECK(l2->pop_index(0) == 1);
-        l2->~DSList();
+        CHECK(l2->getSize() == 0);
+        l2->print();
     }
 
 
 
 }
+
+
 
 // you can run the test using Run CTest in the task bar or by running the tests executable. 
