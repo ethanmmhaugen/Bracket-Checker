@@ -63,7 +63,7 @@ Write two programs (add another executable to the `CMakeLists.txt`), one based o
 
 
 ## Additional Work (Bonus)
-* Check all the `clang` source code from [llvm project](https://github.com/llvm/llvm-project) in the directories `clang/include/` and `clang/lib/`.
+* Check all the `c-lang` source code from [llvm project](https://github.com/llvm/llvm-project) in the directories `clang/include/` and `clang/lib/`.
 * C++ also uses `\*` and `*\` and string delimiters `"` and `'` which can be checked for consistency.
 * How would you check `<>` in C++ since it is used in templates, but can also be used as 
 comparison operators?

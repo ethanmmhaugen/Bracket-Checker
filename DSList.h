@@ -67,7 +67,7 @@ DSList(const DSList& list){
     }
     head = nullptr;
     tail = nullptr;
-
+    size = 0;
 }
 // size
 int getSize(){
@@ -80,7 +80,7 @@ bool isEmpty(){
 // clear
 
 // find an element with a specific value (and return the position. First element in list is pos 0).
-int findNum(int num){
+int findNum(Object num){
     Node* tmp = head;
     int count = 0;
     while(tmp !=nullptr){
@@ -116,8 +116,23 @@ void push_front(Object value){
     head = insert;
 }
 
+//insert from the tail
+void push_back(Object value){
+    Node* curr = tail;
+    Node* insert = new Node(value, nullptr, nullptr);
+    size++;
+    if(curr!= nullptr){
+        insert->prev = curr;
+        curr->next = insert;
+    }
+    else{
+        head = insert;
+    }
+    tail = insert;
+}
+
 // insert at a specified position.
-void push_index(Node x, int index){
+/*void push_index(Node x, int index){
     Node* curr = head;
     for (int i = 0; i< index; i++){
         curr = curr->next;
@@ -128,17 +143,32 @@ void push_index(Node x, int index){
     pre->next = x;
     x->prev = pre;
 }
-
+*/
 //insert at a specified position using value only
-void push_index(int index, Object value){
+void push_index(Object value, int index){
     Node* curr = head;
-    for (int i = 0; i< index; i++){
-        curr = curr->next;
+    if(index>size){
+        throw runtime_error("you suck. List is not that long yet");
     }
-    Node* pre = curr->prev;
-    Node* insert = new Node(value, curr, pre);
-    pre->next = insert;
-    curr->prev = insert;
+    else {
+        for (int i = 0; i < index; i++) {
+            curr = curr->next;
+        }
+        if(index!=size && index != 0) {
+            Node *pre = curr->prev;
+            Node *insert = new Node(value, curr, pre);
+            pre->next = insert;
+            curr->prev = insert;
+            size++;
+        }
+        else if (index == 0){
+            push_front(value);
+        }
+        else{
+            push_back(value);
+        }
+
+    }
 }
 // remove the element in front (pop_front)
 Object pop_front(){
@@ -146,46 +176,74 @@ Object pop_front(){
         return;
     }
      */
-    Node* curr = head->next;
-    if(curr != nullptr){
-        curr->prev = nullptr;
+    if(head==nullptr){
+        throw runtime_error("you suck. List is clearly empty");
     }
-    else{
-        tail = nullptr;
+    while(head!=nullptr) {
+        Node *curr = head->next;
+        if (curr != nullptr) {
+            curr->prev = nullptr;
+        } else {
+            tail = nullptr;
+        }
+        Object stuff = head->data;
+        delete head;
+        head = curr;
+        size--;
+        return stuff;
     }
-    Object stuff = head->data;
-    delete head;
-    head = curr;
-    size--;
-    return stuff;
+}
+
+//Pop from back
+Object pop_back(){
+    if(head==nullptr){
+        throw runtime_error("you suck. List is clearly empty");
+    }
+    while(head!=nullptr) {
+        Node *curr = tail->prev;
+        if (curr != nullptr) {
+            curr->next = nullptr;
+        } else {
+            head = nullptr;
+        }
+        Object stuff = tail->data;
+        delete tail;
+        tail = curr;
+        size--;
+        return stuff;
+    }
 }
 // remove using position.
 Object pop_index(int index){
-        Node* curr = head;
-        for (int i = 0; i< index; i++){
-            curr = curr->next;
+        if(head==nullptr){
+            throw runtime_error("you suck. List is clearly empty");
         }
-        Object stuff = curr->data;
-        Node* behind = curr->next;
-        Node* front = curr->prev;
-        if(behind != nullptr) {
+        if(index !=0 && index !=size-1) {
+            Node* curr = head;
+            for (int i = 0; i< index; i++){
+                curr = curr->next;
+            }
+            Object stuff = curr->data;
+            Node *behind = curr->next;
+            Node *front = curr->prev;
             behind->prev = front;
-        }
-        else{
-            tail = front;
-        }
-        if(front != nullptr) {
             front->next = behind;
+            size--;
+            delete curr;
+            return stuff;
+        }
+        else if(index == 0){
+            pop_front();
         }
         else{
-            head = behind;
+            pop_back();
         }
-        delete curr;
-        size--;
-        return stuff;
 }
 // remove an element with a specific value (find and remove)
 void pop_val(Object val){
+    if(head==nullptr){
+        throw runtime_error("you suck. List is clearly empty");
+    }
     Node* curr = head;
     while(curr->data != val && curr->next != nullptr){
         curr = curr->next;
@@ -208,17 +266,41 @@ void pop_val(Object val){
 }
 //remove all objects with a specific value
 void pop_all_val(Object val){
+    if(head==nullptr){
+        throw runtime_error("you suck. List is clearly empty");
+    }
     Node* curr = head;
-    while(curr->data != val && curr->next != nullptr){
+    Node* tmp = curr;
+    int count = 0;
+    while(curr != nullptr) {
+        while (curr->data != val) {
+            curr = curr->next;
+        }
+        if(curr->prev == nullptr){
+            head = curr->next;
+            curr->next->prev = nullptr;
+            count++;
+        }
+        if (curr->next == nullptr){
+
+        }
+        for (int i = 0; i < count; i++) {
+            size--;
+        }
+    }
+}
+
+int count(Object value){
+    int count = 0;
+    Node* curr = head;
+    while(curr!=nullptr){
+        if(curr->data == value){
+            count++;
+        }
         curr = curr->next;
     }
-    if(curr->next != nullptr) {
-        curr->next->prev = curr->prev;
-        curr->prev->next = curr->next;
-        delete curr;
-    }
-    size--;
-}
+    return count;
+};
 
 Node* getHead(){
     return head;
