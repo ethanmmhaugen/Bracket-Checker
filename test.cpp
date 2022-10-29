@@ -1,6 +1,7 @@
 #define CATCH_CONFIG_MAIN
 #include "catch2/catch.hpp"
 #include "DSList.h"
+#include "checker.h"
 using namespace std;
 
 // add includes
@@ -11,7 +12,8 @@ TEST_CASE("Check that DSList works", "[DSList]")
 
 {
     // add test cases (create lists and specify what the expected output is)
-    /*SECTION("Constructor") {
+
+    SECTION("Constructor") {
         DSList<int> l = DSList<int>();
         CHECK(l.getHead() == nullptr);
         CHECK(l.getTail() == nullptr);
@@ -56,7 +58,7 @@ TEST_CASE("Check that DSList works", "[DSList]")
         CHECK(l2.getSize() == 0);
         CHECK(l2.isEmpty() == true);
         l2.print();
-    }*/
+    }
     SECTION("More Test"){
         DSList<char> l = DSList<char>();
         l.push_front('A');
@@ -85,10 +87,20 @@ TEST_CASE("Check that DSList works", "[DSList]")
         l.~DSList();
     }
 
+    SECTION("checker class testing"){
+        checker theBoy;
+        CHECK(theBoy.runListVersion("test_data/DSVector_good.h").size() == 0);
+        CHECK(theBoy.runListVersion("test_data/DSVector_bad.h").size() == 3);
+        CHECK(theBoy.runListVersion("test_data/DSVector_bad.h")[0] == -1);
+        CHECK(theBoy.runListVersion("test_data/DSVector_bad.h")[1] == 179);
+        CHECK(theBoy.runListVersion("test_data/DSVector_bad.h")[2] == 179);
+        CHECK(theBoy.runListVersion("test_data/DSVector_bad.h").size() == theBoy.runVectorVersion("test_data/DSVector_bad.h").size());
+    }
+
 
 
 }
 
 
 
-// you can run the test using Run CTest in the task bar or by running the tests executable. 
+// you can runListVersion the test using runListVersion CTest in the task bar or by runListVersionning the tests executable. 

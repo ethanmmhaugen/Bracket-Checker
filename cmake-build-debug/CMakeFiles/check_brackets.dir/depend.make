@@ -3,5 +3,7 @@
 
 CMakeFiles/check_brackets.dir/main.cpp.o: ../DSList.h
 CMakeFiles/check_brackets.dir/main.cpp.o: ../DSStack.h
+CMakeFiles/check_brackets.dir/main.cpp.o: ../checker.h
 CMakeFiles/check_brackets.dir/main.cpp.o: ../main.cpp
+CMakeFiles/check_brackets.dir/main.cpp.o: ../testGenerator.h
 

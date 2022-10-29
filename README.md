@@ -1,4 +1,4 @@
-# Assignment: Do My Brackets Match?
+ # Assignment: Do My Brackets Match?
 
 **Objectives:**
 
@@ -75,18 +75,25 @@ comparison operators?
 ## Answers
 1. How long did the program take with each version (You will need more than the test date)?  Describe the reason for the difference in run-time (from your experiment).
 
-   > Your answer
-
+   > The two programs had very similar runtimes, between .002-.003 seconds for each of them. I think the reason for them being almost identical was that I
+   designed the two stack implementations extremely similarly, and used the same code to check brackets only changing which version of the stack I used.
+    
 2. Discuss the difference in memory usage based on your implementation. You will need to think about how the versions 
  store data.
 
-   > Your answer
+   > In the test cases that I ran with rather limited maximum size for the stack, the memory usage was about the same for both implementations.
+    However, from what I know about vectors when their capacity needs to be increased it typically just doubles, which means that at a certain
+>   depth of test data, the vector implementation would allocate way more memory than necessary while the list implementation would only even implement the amout of memory necessary
 
 3. Which version would you use in practice. Why?
 
-   > Your answer
+   > I would use the list implementation since it runs at about the same speed, but with more precise memory usage.
 
 4. Make sure that your stack implementation does not have memory leaks.
+   Valgrind literally says "Nothing to show", not sure what else to paste in here.
+
+5. I attempted bonus for early submission, /* and " delimiters, recommendations for missing brackets, and generating a bigger list of test data (the testGenerator class)
+
 
    ```
    Paste the output of valgrind or the AddressSanitizer to for running your tests for DSList and DSStack to show that your code is fine. 
@@ -96,19 +103,19 @@ comparison operators?
 ## Grading Rubric
 
 |                             | Points Possible | Points Awarded |
-| :------------------         | --------------: | -------------: |
-| DSList Class                | 20              |                |
-| CATCH2 tests DSList         |  5              |                |
-| DSStack Class (List)        | 10              |                |
-| DSStack Class (Vector)      |  5              |                |
-| Bracket checker (OK/not OK) | 15              |                |
-| CATCH2 tests checker        |  5              |                |
-| Runtime comparison          |  5              |                |
-| Detailed errors for checker | 10              |                |
-| Answer to questions         |  5              |                |
-| Proper Memory Management (valgrind) | 10      |                |
-| Formatting, Comments, etc.  |  5              |                |
-| Proper use of GitHub        |  5              |                |
-| Early submission bonus (48 hrs)   |  + 5      |                |
-| Additional Work             | up to +10       |                |
+| :------------------         |----------------:| -------------: |
+| DSList Class                |              20 |                |
+| CATCH2 tests DSList         |               5 |                |
+| DSStack Class (List)        |              10 |                |
+| DSStack Class (Vector)      |               5 |                |
+| Bracket checker (OK/not OK) |              15 |                |
+| CATCH2 tests checker        |               5 |                |
+| Runtime comparison          |               5 |                |
+| Detailed errors for checker |            +<br/> 10 |                |
+| Answer to questions         |               5 |                |
+| Proper Memory Management (valgrind) |              10 |                |
+| Formatting, Comments, etc.  |               5 |                |
+| Proper use of GitHub        |               5 |                |
+| Early submission bonus (48 hrs)   |             + 5 |                |
+| Additional Work             |       up to +10 |                |
 

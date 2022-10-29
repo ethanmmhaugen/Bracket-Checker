@@ -8,111 +8,100 @@
 using namespace std;
 
 template <typename Object>
-class DSVector
-{
+class DSVector {
 private:
-  size_t theSize;
-  size_t theCapacity;
-  Object *objects;
+    size_t theSize;
+    size_t theCapacity;
+    Object *objects;
 
 public:
-  // Create an empty DSVector
-  explicit DSVector(size_t initSize = 0)
-      : theSize{initSize}, theCapacity{initSize}
-  {
-    objects = new Object[theCapacity];
-  }
+    // Create an empty DSVector
+    explicit DSVector(size_t initSize = 0)
+            : theSize{initSize}, theCapacity{initSize} {
+        objects = new Object[theCapacity];
+    }
 
-  // C++11 initializer list with {}
-  DSVector(const initializer_list<Object> &v)
-  {
-    theSize = 0;
-    theCapacity = v.size();
-    objects = new Object[theCapacity];
-    for (auto itm : v)
-      this->push_back(itm);
-  }
+    // C++11 initializer list with {}
+    DSVector(const initializer_list<Object> &v) {
+        theSize = 0;
+        theCapacity = v.size();
+        objects = new Object[theCapacity];
+        for (auto itm: v)
+            this->push_back(itm);
 
-  // Copy constructor
-  DSVector(const DSVector &rhs)
-      : theSize{rhs.theSize}, theCapacity{rhs.theCapacity}, objects{nullptr}
-  {
-    objects = new Object[theCapacity];
-    for (size_t k = 0; k < theSize; ++k)
-      objects[k] = rhs.objects[k];
-  }
+    }
 
-  // C++11 Move constructor ... steal the pointer to objects
-  DSVector(DSVector &&rhs)
-      : theSize{rhs.theSize}, theCapacity{rhs.theCapacity}, objects{rhs.objects}
-  {
-    rhs.theSize = 0;
-    rhs.theCapacity = 0;
-    rhs.objects = nullptr; // so the destructor does not destroy the objects
-  }
+    // Copy constructor
+    DSVector(const DSVector &rhs)
+            : theSize{rhs.theSize}, theCapacity{rhs.theCapacity}, objects{nullptr} {
+        objects = new Object[theCapacity];
+        for (size_t k = 0; k < theSize; ++k)
+            objects[k] = rhs.objects[k];
+    }
 
-  // Destructor
-  ~DSVector()
-  {
-    delete[] objects;
-  }
+    // C++11 Move constructor ... steal the pointer to objects
+    DSVector(DSVector &&rhs)
+            : theSize{rhs.theSize}, theCapacity{rhs.theCapacity}, objects{rhs.objects} {
+        rhs.theSize = 0;
+        rhs.theCapacity = 0;
+        rhs.objects = nullptr; // so the destructor does not destroy the objects
+    }
 
-  // Assignment operator
-  DSVector &operator=(const DSVector &rhs)
-  {
-    delete[] objects;
-    theSize = rhs.theSize;
-    theCapacity = rhs.theCapacity;
-    objects = new Object[theCapacity];
-    for (size_t k = 0; k < theSize; ++k)
-      objects[k] = rhs.objects[k];
+    // Destructor
+    ~DSVector() {
+        delete[] objects;
+    }
 
-    return *this;
-  }
+    // Assignment operator
+    DSVector &operator=(const DSVector &rhs) {
+        delete[] objects;
+        theSize = rhs.theSize;
+        theCapacity = rhs.theCapacity;
+        objects = new Object[theCapacity];
+        for (size_t k = 0; k < theSize; ++k)
+            objects[k] = rhs.objects[k];
 
-  // C++11 move assignment operator: move elements from rhs using std::swap()
-  DSVector &operator=(DSVector &&rhs)
-  {
-    swap(theSize, rhs.theSize);
-    swap(theCapacity, rhs.Capacity);
-    swap(objects, rhs.objects);
+        return *this;
+    }
 
-    return *this;
-  }
+    // C++11 move assignment operator: move elements from rhs using std::swap()
+    DSVector &operator=(DSVector &&rhs) {
+        swap(theSize, rhs.theSize);
+        swap(theCapacity, rhs.Capacity);
+        swap(objects, rhs.objects);
 
-  // is the vector empty?
-  bool empty() const
-  {
-    return size() == 0;
-  }
+        return *this;
+    }
 
-  // how many elements?
-  int size() const
-  {
-    return theSize;
-  }
+    // is the vector empty?
+    bool empty() const {
+        return size() == 0;
+    }
 
-  // what is the capacity?
-  int capacity() const
-  {
-    return theCapacity;
-  }
+    // how many elements?
+    int size() const {
+        return theSize;
+    }
 
-  // subscript operator [
-  Object &operator[](size_t index)
-  {
-    if (index < 0 || index >= size())
-      throw std::runtime_error("out of bounds!");
-    return objects[index];
-  }
 
-  const Object &operator[](size_t index) const
-  {
-    if (index < 0 || index >= size())
-      throw std::runtime_error("out of bounds!");
-    return objects[index];
-  }
+    // what is the capacity?
+    int capacity() const {
+        return theCapacity;
+    }
 
+    // subscript operator[
+    Object &operator[](size_t index) {
+        if (index < 0 || index >= size())
+            throw std::runtime_error("out of bounds!");
+        return objects[index];
+    }
+
+//"
+    const Object &operator[](size_t index) const {
+        if (index < 0 || index >= size())
+            throw std::runtime_error("//out of bounds!");
+        return objects[index];
+    }
   // reserve more space
   void reserve(size_t newCapacity)
   {

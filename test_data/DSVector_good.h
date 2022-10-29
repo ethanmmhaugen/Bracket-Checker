@@ -14,7 +14,7 @@ private:
   size_t theSize;
   size_t theCapacity;
   Object *objects;
-
+/*
 public:
   // Create an empty DSVector
   explicit DSVector(size_t initSize = 0)
@@ -40,6 +40,7 @@ public:
     objects = new Object[theCapacity];
     for (size_t k = 0; k < theSize; ++k)
       objects[k] = rhs.objects[k];
+      */
   }
 
   // C++11 Move constructor ... steal the pointer to objects
@@ -98,7 +99,7 @@ public:
     return theCapacity;
   }
 
-  // subscript operator [
+  // subscript operator[
   Object &operator[](size_t index)
   {
     if (index < 0 || index >= size())

@@ -1,55 +1,51 @@
 #include <iostream>
 #include <algorithm>
-
+#include <fstream>
 #include "DSList.h"
 #include "DSStack.h"
+#include <string>
+#include <cstring>
+#include "checker.h"
+#include "testGenerator.h"
 
 using namespace std;
 
-bool isCorrect(string test, List::DSStack<char>& myStack) {
-
-    for (const char &letter: test) {
-        if (letter == '(' || letter == '{' || letter == '[')
-            myStack.push(letter);
-        if(letter == ')' || letter == '}' || letter == ']'){
-            if(myStack.empty()){
-                return false;
-            }
-            else if(letter == ')' && myStack.top() == '('){
-                    myStack.pop();
-            }else if(letter == '}' && myStack.top() == '{'){
-                    myStack.pop();
-            }else if(letter == ']' && myStack.top() == '[') {
-                myStack.pop();
-            }
-            else {
-                return false;
-            }
-        }
-        cout << myStack.size() << endl;
-    }
-    if(myStack.empty()){
-        return true;
-    }
-    else{
-        return false;
-    }
-
-}
 int main(int argc, char **argv)
 {
-    List::DSStack<char> myStack;
-    string test = "lijbvwej(wetbrbrst{hrthrs}rstbrsb)rhedyh";
+    string test;
+    checker theBoy;
+    test = argv[1];
+
+    //the chrono stuff is for time keeping between the two variants
+    chrono::time_point<chrono::system_clock> start, end;
+    start = chrono::system_clock::now();
+
+    // actually running the test
+    vector<int> result = theBoy.runListVersion(test);
+    end = chrono::system_clock::now();
+    chrono::duration<double> elapsed_time = end-start;
+    //outputting time
+    cout << "Time for List Stack was " << elapsed_time.count() << "!!" << endl;
 
 
 
-    if (isCorrect(test, myStack)) {
-        cout << "your code is bulletproof" << endl;
+    start = chrono::system_clock::now();
+
+    //running the test for vector version
+    vector<int> result2 = theBoy.runVectorVersion(test);
+
+
+    end = chrono::system_clock::now();
+    elapsed_time = end-start;
+    cout << "Time for Vector Stack was " << elapsed_time.count() << "!!" << endl;
+
+    //outputting the proper terminal response with the evaluate function
+    int code = theBoy.evaluate(result, test);
+    if(code == 0){
         return 0;
-    } else {
-        cout << "She's almost bulletproof" << endl;
-        return 1;
     }
+    return 1;
+
 
     // A return code != 0 tells the operating system that there is an issue.
 

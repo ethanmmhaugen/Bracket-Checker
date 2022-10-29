@@ -49,9 +49,10 @@ DSList(const DSList& list){
     head = new Node(list.head->data);
     size = 1;
     Node *curr = head;
-    while(list.head->next != nullptr){
-        list.head = list.head->next;
-        curr->next = new Node(list.head->data, nullptr, curr);
+    Node *listCurr = list.head;
+    while(listCurr->next != nullptr){
+        listCurr = listCurr->next;
+        curr->next = new Node(listCurr->data, nullptr, curr);
         size++;
         curr = curr->next;
     }
@@ -99,6 +100,14 @@ void push_front(Node x){
     x->next = curr;
     head = x;
 
+}
+Object index(int index){
+    Node* curr = head;
+    while(curr && index>0){
+        curr = curr->next;
+        index--;
+    }
+    return curr->data;
 }
 
 //insert in front using value only
